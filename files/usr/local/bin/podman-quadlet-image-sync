@@ -1,0 +1,54 @@
+#!/usr/bin/env python3
+import os
+import sys
+import subprocess
+
+import yaml
+
+
+def load_images(basedir):
+    images = {}
+
+    for fname in os.listdir(basedir):
+        if not fname.endswith('.yml'):
+            continue
+
+        with open(f'{basedir}/{fname}', 'r') as f:
+            data = yaml.safe_load(f)
+
+            containers = data['spec']['template']['spec']['containers']
+            for container in containers:
+                images[container['image']] = True
+
+    return images
+
+
+def load_image(image):
+    run_cmd('podman', 'pull', image)
+
+
+def run_cmd(*args):
+    proc = subprocess.Popen(args, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    proc.wait()
+
+    while True:
+        outline = proc.stdout.readline()
+        errline = proc.stderr.readline()
+        if not outline and not errline: break
+
+        sys.stdout.write(outline.decode())
+        sys.stderr.write(errline.decode())
+
+    if proc.returncode != 0:
+        sys.exit(proc.returncode)
+
+
+def main():
+    images = load_images('/etc/containers/systemd')
+    
+    for image in images.keys():
+        load_image(image)
+
+
+if __name__ == '__main__':
+    main()

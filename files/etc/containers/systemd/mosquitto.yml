@@ -1,0 +1,22 @@
+---
+apiversion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: mosquitto
+  name: mosquitto
+spec:
+  replicas: 1
+  selector:
+    matchlabels:
+      app: mosquitto
+  template:
+    metadata:
+      labels:
+        app: moquitto
+    spec:
+      hostNetwork: true
+      containers:
+        - name: mqtt-broker
+          image: sdvblueprint.azurecr.io/sdvblueprint/eclipse-mosquitto/mqtt-broker:latest
+          imagePullPolicy: IfNotPresent 

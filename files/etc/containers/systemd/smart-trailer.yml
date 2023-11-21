@@ -1,0 +1,22 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: smart-trailer
+  name: smart-atrailer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: smart-trailer
+  template:
+    metadata:
+      labels:
+        app: smart-trailer
+    spec:
+      hostNetwork: true
+      containers:
+        - name: app
+          image: sdvblueprint.azurecr.io/sdvblueprint/in-vehicle-stack/smart_trailer_application:0.1.0
+          imagePullPolicy: IfNotPresent

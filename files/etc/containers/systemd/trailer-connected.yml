@@ -1,0 +1,22 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: trailer-connected
+  name: trailer-connected
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: trailer-connected
+  template:
+    metadata:
+      labels:
+        app: trailer-connected
+    spec:
+      hostNetwork: true
+      containers:
+        - name: app
+          image: sdvblueprint.azurecr.io/sdvblueprint/in-vehicle-stack/trailer_connected_provider:0.1.0
+          imagePullPolicy: IfNotPresent

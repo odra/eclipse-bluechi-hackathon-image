@@ -1,0 +1,22 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: trailer-properties
+  name: trailer-properties
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: trailer-properties
+  template:
+    metadata:
+      labels:
+        app: trailer-properties
+    spec:
+      hostNetwork: true
+      containers:
+        - name: app
+          image: sdvblueprint.azurecr.io/sdvblueprint/in-vehicle-stack/trailer_properties_provider:0.1.0
+          imagePullPolicy: IfNotPresent

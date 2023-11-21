@@ -1,0 +1,7 @@
+# https://docs.podman.io/en/latest/markdown/podman-systemd.unit.5.html
+[Kube]
+Yaml=trailer-properties.yml
+
+# Commented to disable the service to automatically start
+# [Install]
+# WantedBy=default.target

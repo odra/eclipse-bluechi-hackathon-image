@@ -1,0 +1,22 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: freyja
+  name: freyja
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: freyja
+  template:
+    metadata:
+      labels:
+        app: freyja
+    spec:
+      hostNetwork: true
+      containers:
+        - name: local
+          image: sdvblueprint.azurecr.io/sdvblueprint/eclipse-freyja/local-with-ibeji:0.1.0
+          imagePullPolicy: IfNotPresent

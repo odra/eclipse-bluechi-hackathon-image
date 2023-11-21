@@ -1,0 +1,22 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: agemo
+  name: agemo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: agemo
+  template:
+    metadata:
+      labels:
+        app: agemo
+    spec:
+      hostNetwork: true
+      containers:
+        - name: pub-sub-service
+          image: sdvblueprint.azurecr.io/sdvblueprint/eclipse-agemo/pub-sub-service:0.1.0
+          imagePullPolicy: IfNotPresent

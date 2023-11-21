@@ -1,0 +1,22 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: chariott
+  name: chariott
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: chariott
+  template:
+    metadata:
+      labels:
+        app: chariott
+    spec:
+      hostNetwork: true
+      containers:
+        - name: service-discovery
+          image: sdvblueprint.azurecr.io/sdvblueprint/eclipse-chariott/service-discovery:0.1.1
+          imagePullPolicy: IfNotPresent

@@ -1,0 +1,22 @@
+---
+apiversion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: ibeji
+  name: ibeji
+spec:
+  replicas: 1
+  selector:
+    matchlabels:
+      app: ibeji
+  template:
+    metadata:
+      labels:
+        app: ibeji
+    spec:
+      hostNetwork: true
+      containers:
+        - name: invehicle-digital-twin
+          image: sdvblueprint.azurecr.io/sdvblueprint/eclipse-ibeji/invehicle-digital-twin:0.1.0
+          imagePullPolicy: IfNotPresent 

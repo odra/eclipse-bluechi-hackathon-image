@@ -1,0 +1,9 @@
+#!/bin/bash
+
+systemctl stop chariott
+systemctl stop mosquitto
+systemctl stop ibeji
+systemctl stop agemo
+systemctl stop freyja
+systemctl stop trailer-services
+systemctl stop smart-trailer
