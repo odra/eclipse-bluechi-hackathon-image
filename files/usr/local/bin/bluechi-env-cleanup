@@ -5,5 +5,6 @@ systemctl stop mosquitto
 systemctl stop ibeji
 systemctl stop agemo
 systemctl stop freyja
-systemctl stop trailer-services
+systemctl stop trailer-connected
+systemctl stop trailer-properties
 systemctl stop smart-trailer

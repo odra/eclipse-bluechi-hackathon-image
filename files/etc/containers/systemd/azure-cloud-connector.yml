@@ -1,0 +1,22 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: azure-cloud-connector
+  name: azure-cloud-connector
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: azure-cloud-connector
+  template:
+    metadata:
+      labels:
+        app: azure-cloud-connector
+    spec:
+      hostNetwork: true
+      containers:
+        - name: app
+          image: sdvblueprint.azurecr.io/sdvblueprint/eclipse-freyja/azure-cloud-connector:0.1.0
+          imagePullPolicy: IfNotPresent

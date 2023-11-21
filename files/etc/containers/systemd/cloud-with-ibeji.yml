@@ -1,0 +1,22 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: cloud-with-ibeji
+  name: cloud-with-ibeji
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cloud-with-ibeji
+  template:
+    metadata:
+      labels:
+        app: cloud-with-ibeji
+    spec:
+      hostNetwork: true
+      containers:
+        - name: app
+          image: sdvblueprint.azurecr.io/sdvblueprint/eclipse-freyja/cloud-with-ibeji:0.1.0
+          imagePullPolicy: IfNotPresent
