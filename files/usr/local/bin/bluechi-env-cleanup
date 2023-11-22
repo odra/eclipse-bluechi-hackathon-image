@@ -8,3 +8,5 @@ systemctl stop freyja
 systemctl stop trailer-connected
 systemctl stop trailer-properties
 systemctl stop smart-trailer
+
+podman system prune -f
