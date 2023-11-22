@@ -2,6 +2,8 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  annotations:
+    bind-mount-options:/etc/freyja/config: Z  
   labels:
     app: azure-cloud-connector
   name: azure-cloud-connector
@@ -20,3 +22,11 @@ spec:
         - name: app
           image: sdvblueprint.azurecr.io/sdvblueprint/eclipse-freyja/azure-cloud-connector:0.1.0
           imagePullPolicy: IfNotPresent
+          volumeMounts:
+          - mountPath: /mnt/config
+            name: freyjaconfig
+      volumes:
+        - name: freyjaconfig
+          hostPath:
+            path: /etc/freyja/config
+            type: DirectoryOrCreate
